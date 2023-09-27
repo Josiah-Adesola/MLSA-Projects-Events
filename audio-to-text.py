@@ -27,11 +27,11 @@ def main():
     try:
         # Create the speech recognizer using the function
         # Convert the input audio file to .wav
-        input_audio_file = "dream.m4a"  # Replace with the path to your input audio file
+        input_audio_file = "audio-files/poor-breathe.m4a"  # Replace with the path to your input audio file
         output_audio_file = "output_audio.wav"
         convert_audio_to_wav(input_audio_file, output_audio_file)
         speech_recognizer = speech_recognize_continuous_from_file(output_audio_file )
-        #playsound(audio_file)
+        playsound(input_audio_file)
 
         # Define a callback function for recognized speech
         def on_recognized(evt):
