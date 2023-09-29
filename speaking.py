@@ -17,7 +17,7 @@ def main():
         audio_input = speech_sdk.AudioConfig(filename=str(audio_file_path))
         speech_recognizer = speech_sdk.SpeechRecognizer(speech_config=speech_config, audio_config=audio_input)
 
-        playsound(audio_file_path)
+        #playsound(audio_file_path)
 
         print("Recognizing first result...")
 
