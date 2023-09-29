@@ -1,5 +1,5 @@
 import streamlit as st
-from audio import transcribe_audio
+from audio2text import transcribe_audio
 
 def main():
     st.title("Audio to Text Transcription")
