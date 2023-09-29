@@ -38,20 +38,9 @@ def main():
             recognized_text = evt.result.text
             sentences = recognized_text.split(".")
             text = ".\n".join(sentences)
-            word_to_match = "CLOSING"
 
-            # Split the text into sentences based on periods (.)
-            sentences = text.split(".")
+            print(text)
 
-            # Use regex to remove sentences that start with the word_to_match
-            filtered_sentences = [sentence.strip() for sentence in sentences if not re.match(fr"^\s*{re.escape(word_to_match)}", sentence, re.IGNORECASE)]
-
-            # Join the remaining sentences back into a text
-            filtered_text = ".".join(filtered_sentences)
-
-            print(filtered_text)
-
-        
         # Subscribe to the recognized event
         speech_recognizer.recognized.connect(on_recognized)
 
