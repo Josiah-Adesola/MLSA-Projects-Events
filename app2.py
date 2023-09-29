@@ -4,7 +4,7 @@ from audio import transcribe_audio
 def main():
     st.title("Audio to Text Transcription")
 
-    uploaded_audio = st.file_uploader("Upload an audio file (MP3, WAV,m4aetc.)", type=["mp3", "wav", "m4a"])
+    uploaded_audio = st.file_uploader("Upload an audio file (MP3, WAV,m4a, etc.)", type=["mp3", "wav", "m4a"])
 
     if uploaded_audio is not None:
         st.audio(uploaded_audio, format="audio/wav")
