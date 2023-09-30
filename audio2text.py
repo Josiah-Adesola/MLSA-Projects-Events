@@ -1,10 +1,13 @@
-
 from dotenv import load_dotenv
 import os
-import re
 import time
 import azure.cognitiveservices.speech as speechsdk
 from pydub import AudioSegment
+import warnings
+
+# Suppress RuntimeWarnings related to ffprobe/avprobe
+warnings.filterwarnings("ignore", category=RuntimeWarning, message="Couldn't find ffprobe or avprobe")
+
 
 # Get Configuration Settings
 load_dotenv()
