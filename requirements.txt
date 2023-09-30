@@ -11,4 +11,6 @@ wrapt==1.15.0
 python-dotenv
 streamlit
 pydub
+ffmeg
+ffprobe
 azure.cognitiveservices.speech 
