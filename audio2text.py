@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 import os
+import ffmpeg
 import time
 import azure.cognitiveservices.speech as speechsdk
 from pydub import AudioSegment
