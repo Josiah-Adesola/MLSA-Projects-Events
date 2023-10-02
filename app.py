@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+import ffmpeg
 import tempfile
 from audio2text import transcribe_audio
 
