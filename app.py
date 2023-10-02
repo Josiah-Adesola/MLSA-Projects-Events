@@ -7,7 +7,7 @@ def main():
     uploaded_audio = st.file_uploader("Upload an audio file (MP3, WAV,m4a, etc.)", type=["mp3", "wav", "m4a"])
 
     if uploaded_audio is not None:
-        st.audio(uploaded_audio, format="audio/wav")
+        st.audio(uploaded_audio, format="audio/*")
 
         if st.button("Transcribe"):
             with st.spinner("Transcribing..."):

@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 import os
+import subprocess
 import ffmpeg
 import time
 import azure.cognitiveservices.speech as speechsdk
@@ -16,8 +17,8 @@ cog_key = os.getenv('COG_SERVICE_KEY')
 cog_region = os.getenv('COG_SERVICE_REGION')
 
 def convert_audio_to_wav(input_file, output_file):
-    audio = AudioSegment.from_file(input_file)
-    audio.export(output_file, format="wav")
+    subprocess.call(['ffmpeg', '-i', input_file, output_file])
+
 
 def speech_recognize_continuous_from_file(file):
     audio_file_path = os.path.abspath(file)
