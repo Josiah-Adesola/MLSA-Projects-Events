@@ -18,7 +18,7 @@ def main():
 
         if st.button("Transcribe"):
             with st.spinner("Transcribing..."):
-                result = transcribe_audio(uploaded_audio)
+                result = transcribe_audio(temp_audio_path)
                 if result is not None:
                     st.write("Transcription Result:")
                     st.success(result)
