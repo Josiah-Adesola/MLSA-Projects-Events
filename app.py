@@ -1,4 +1,6 @@
 import streamlit as st
+import os
+import tempfile
 from audio2text import transcribe_audio
 
 def main():
@@ -7,7 +9,12 @@ def main():
     uploaded_audio = st.file_uploader("Upload an audio file (MP3, WAV,m4a, etc.)", type=["mp3", "wav", "m4a"])
 
     if uploaded_audio is not None:
-        st.audio(uploaded_audio, format="audio/*")
+        # Save the uploaded audio to a temporary file
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as temp_audio:
+            temp_audio.write(uploaded_audio.read())
+            temp_audio_path = temp_audio.name
+
+        st.audio(temp_audio_path, format="audio/wav")
 
         if st.button("Transcribe"):
             with st.spinner("Transcribing..."):
