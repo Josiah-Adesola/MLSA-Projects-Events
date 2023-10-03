@@ -9,6 +9,7 @@ charset-normalizer==3.2.0
 click==8.1.7
 colorama==0.4.6
 dill==0.3.7
+ffmpeg
 ffmpeg-python
 gitdb==4.0.10
 GitPython==3.1.37
