@@ -1,29 +1,36 @@
-import subprocess
+import io
+import pathlib
 
-def convert_mp3_to_wav(input_file, output_file):
-    """
-    Convert an audio file from MP3 to WAV format using FFmpeg.
+import streamlit as st
+from pydub import AudioSegment
 
-    Args:
-        input_file (str): Path to the input MP3 file.
-        output_file (str): Path to the output WAV file.
+filename = None
+filestream = io.BytesIO()
 
-    Returns:
-        bool: True if conversion is successful, False otherwise.
-    """
-    try:
-        subprocess.call(['ffmpeg', '-i', input_file, output_file])
-        return True
-    except Exception as e:
-        print(f"Error: {e}")
-        return False
+st.title('MP3 to WAV Converter test app')
 
-# Define input and output file paths
-input_audio_file = 'dream.m4a'
-output_wav_file = 'converted_to_wav_file.wav'
+st.markdown("""This is a quick example app for using the **pydub** audio library on Streamlit Cloud.
+There are some issues with `ffmpeg` on Streamlit Cloud regarding temporary files and file permissions.
+The quick fix is to use `libav` instead of `ffmpeg` in `packages.txt` file, because pydub prefers `libav` over `ffmpeg` if it is installed.
+Therefore this example app uses `libav`.""")
 
-# Call the conversion function
-if convert_mp3_to_wav(input_audio_file, output_wav_file):
-    print("Conversion successful.")
-else:
-    print("Conversion failed.")
+uploaded_mp3_file = st.file_uploader('Upload Your MP3 File', type=['mp3', 'm4a'])
+
+if uploaded_mp3_file:
+    uploaded_mp3_file_length = len(uploaded_mp3_file.getvalue())
+    if uploaded_mp3_file_length > 0:
+        st.text(f'Size of uploaded mp3 file: {uploaded_mp3_file_length} bytes')
+        audio_segment = AudioSegment.from_mp3(uploaded_mp3_file)
+        # do some more processing here with the mp3 file(?)
+        handler = audio_segment.export(filestream, format="wav")  # handler not needed
+        filename = pathlib.Path(uploaded_mp3_file.name).stem
+
+if filestream and filename:
+    content = filestream.getvalue()
+    length = len(content)
+    if length > 0:
+        st.download_button(label="Download wav file",
+                data=content,
+                file_name=f'{filename}.wav',
+                mime='audio/wav')
+        st.text(f'Size of "{filename}.wav" file to download: {length} bytes')
