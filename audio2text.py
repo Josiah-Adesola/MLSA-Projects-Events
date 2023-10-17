@@ -17,7 +17,7 @@ cog_key = os.getenv('COG_SERVICE_KEY')
 cog_region = os.getenv('COG_SERVICE_REGION')
 
 def convert_audio_to_wav(input_file, output_file):
-    subprocess.call(['ffmpeg', '-i', input_file, output_file])
+    subprocess.call(['ffmpeg', '-i', input_file, output_file], shell=True)
 
 
 def speech_recognize_continuous_from_file(file):
