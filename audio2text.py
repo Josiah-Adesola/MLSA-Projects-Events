@@ -51,7 +51,7 @@ def transcribe_audio(input_audio_file):
         speech_recognizer.start_continuous_recognition()
 
         # Wait for recognition to complete (adjust the duration as needed)
-        time.sleep(30)  # This allows recognition to continue for 10 seconds
+        time.sleep(12)  # This allows recognition to continue for 10 seconds
 
         # Stop continuous recognition
         speech_recognizer.stop_continuous_recognition()
