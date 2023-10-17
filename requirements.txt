@@ -2,3 +2,4 @@ streamlit
 azure.cognitiveservices.speech
 pydub
 python-ffmpeg
+ffmpeg-downloader
