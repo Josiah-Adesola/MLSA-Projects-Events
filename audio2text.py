@@ -11,7 +11,7 @@ warnings.filterwarnings("ignore", category=RuntimeWarning, message="Couldn't fin
 
 
 # Get Configuration Settings
-load_dotenv()
+
 cog_key = os.getenv('COG_SERVICE_KEY')
 cog_region = os.getenv('COG_SERVICE_REGION')
 
