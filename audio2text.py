@@ -64,4 +64,3 @@ def transcribe_audio(input_audio_file):
 
     except Exception as ex:
         return str(ex)
-
