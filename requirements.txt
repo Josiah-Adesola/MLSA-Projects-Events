@@ -1,5 +1,4 @@
 streamlit
 azure.cognitiveservices.speech
 pydub
-dotenv
 python-ffmpeg
