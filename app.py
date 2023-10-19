@@ -7,7 +7,7 @@ from audio2text import convert_audio_to_wav, transcribe_audio  # Replace with yo
 def main():
     st.title("Audio to Text Transcription")
 
-    uploaded_audio = st.file_uploader("Upload an audio file (MP3, WAV, etc.)", type=["mp3", "wav"])
+    uploaded_audio = st.file_uploader("Upload an audio file (MP3, WAV, etc.)", type=["mp3", "wav", "m4a"])
 
     # Check if the uploaded audio is not None and not in WAV format
     if uploaded_audio is not None and not uploaded_audio.name.endswith(".wav"):
