@@ -1,39 +1,40 @@
 import streamlit as st
-import os
 import tempfile
-import uuid  # For generating a unique ID
-from audio2text import transcribe_audio
+import os
 
-def generate_unique_filename():
-    # Generate a unique filename based on a random component (UUID)
-    unique_id = str(uuid.uuid4().hex)[:8]  # Extract the first 8 characters of the UUID
-    filename = f"output_audio_{unique_id}.wav"
-    return filename
+from audio2text import convert_audio_to_wav, transcribe_audio  # Replace with your module name
 
 def main():
     st.title("Audio to Text Transcription")
 
-    uploaded_audio = st.file_uploader("Upload an audio file (MP3, WAV, m4a, etc.)", type=["mp3", "wav", "m4a"])
+    uploaded_audio = st.file_uploader("Upload an audio file (MP3, WAV, etc.)", type=["mp3", "wav"])
 
-    if uploaded_audio is not None:
-        # Generate a unique filename for the output_audio.wav
-        output_audio_filename = generate_unique_filename()
-        output_audio_path = os.path.join(tempfile.gettempdir(), output_audio_filename)
+    # Check if the uploaded audio is not None and not in WAV format
+    if uploaded_audio is not None and not uploaded_audio.name.endswith(".wav"):
+        # Save the uploaded audio to a temporary file and convert it to WAV
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".wav") as temp_audio:
+            temp_audio.write(uploaded_audio.read())
+            temp_audio_path = temp_audio.name
 
-        # Save the uploaded audio to the generated unique filename
-        with open(output_audio_path, "wb") as output_audio_file:
-            output_audio_file.write(uploaded_audio.read())
+            # Convert the uploaded audio to WAV format
+            convert_audio_to_wav(temp_audio_path, temp_audio_path)
 
-        st.audio(output_audio_path, format="audio/wav")
+        st.audio(temp_audio_path, format="audio/wav")
 
         if st.button("Transcribe"):
             with st.spinner("Transcribing..."):
-                result = transcribe_audio(output_audio_path)
+                result = transcribe_audio(temp_audio_path)
                 if result is not None:
                     st.write("Transcription Result:")
-                    st.success(result)
+                    st.write(result)
                 else:
                     st.write("Transcription failed or returned 'None'.")
+
+        # Clean up the temporary audio file
+        os.remove(temp_audio_path)
+        
+        # Clear the cache for the output.wav
+        st.experimental_rerun()
 
 if __name__ == "__main__":
     main()
