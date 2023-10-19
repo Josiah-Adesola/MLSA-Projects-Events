@@ -31,8 +31,6 @@ def main():
                     st.write("Transcription failed or returned 'None'.")
 
         
-        # Clear the cache for the output.wav
-        st.experimental_rerun()
 
 if __name__ == "__main__":
     main()
