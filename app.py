@@ -30,8 +30,6 @@ def main():
                 else:
                     st.write("Transcription failed or returned 'None'.")
 
-        # Clean up the temporary audio file
-        os.remove(temp_audio_path)
         
         # Clear the cache for the output.wav
         st.experimental_rerun()
